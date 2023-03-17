@@ -64,7 +64,7 @@ const SignUp: React.FC = () => {
       <Input
         required
         name="confirmPassword"
-        placeholder="confirmPassword"
+        placeholder="confirm password"
         type="password"
         mb={2}
         onChange={onChange}
