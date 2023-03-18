@@ -14,6 +14,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase for SSR
+
 // avoids calling the server both on the client and server
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const firestore = getFirestore(app);
