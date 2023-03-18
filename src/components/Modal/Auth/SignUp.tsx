@@ -3,7 +3,7 @@ import { Input, Button, Flex, Text } from '@chakra-ui/react';
 import { authModalState } from '@/atoms/authModalAtoms';
 import { useSetRecoilState } from 'recoil';
 import { auth } from '@/firebase/clientApp';
-import { FIREBASE_ERRORS } from '@/firebae/errors';
+import { FIREBASE_ERRORS } from '@/firebase/errors';
 
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
@@ -79,12 +79,6 @@ const SignUp: React.FC = () => {
         }}
         bg="gray.50"
       />
-      {error ||
-        (userError && (
-          <Text textAlign="center" color="red" fontSize="10pt">
-            {error || FIREBASE_ERRORS[userError.message]}
-          </Text>
-        ))}
       <Input
         required
         name="confirmPassword"
@@ -104,7 +98,14 @@ const SignUp: React.FC = () => {
         bg="gray.50"
       />
       <Text textAlign="center" color="red" fontSize="10pt">
-        {error}
+        {(error || userError) && (
+          <Text textAlign="center" color="red" fontSize="10pt">
+            {error ||
+              FIREBASE_ERRORS[
+                userError?.message as keyof typeof FIREBASE_ERRORS
+              ]}
+          </Text>
+        )}
       </Text>
       {/* ChakraUI allows for isLoading boolean on Button */}
       <Button
